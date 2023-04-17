@@ -44,8 +44,9 @@ int main(int argc, char **argv) {
         to_print.open("error.txt", ios::in);
         cout << to_print.rdbuf();
         to_print.close();
+    } else {
+        cout << "Syntactical Correct." << endl;
     }
-    cout << "Syntactical Correct." << endl;
     return 0;
 }
 
