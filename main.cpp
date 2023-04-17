@@ -29,7 +29,9 @@ bool is_error = false;
 void error_line_write(int line, char c);
 void correct_line_write(int line, const string &main_key, const string &word);
 void words_analysis(string &to_scan);
-
+// ll(1) to learn
+// Reconstruct everything when necessary
+// Find a way to store the connection among the words
 int main(int argc, char **argv) {
     string input_src;
     correct_line.open("correct.txt", ios::out | ios::trunc);
