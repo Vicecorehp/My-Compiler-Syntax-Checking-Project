@@ -8,7 +8,6 @@
 #include "Syntax.h"
 #include "Word_info.h"
 
-using std::make_pair;
 using std::ofstream;
 using std::vector;
 using std::cout;
@@ -26,12 +25,8 @@ map<char, string> char_cast = { {'(', "LP"},   {')', "RP"},    {'{', "LC"},    {
                                 {'.', "DOT"},  {'!', "NOT"},   {'=', "ASSIGNOP"} };
 
 vector<Word_info*> word_repo;
-ofstream correct_line;
-ofstream error_line;
 bool is_word_error = false;
 
-void print_file_by_name(const string &name);
-void error_line_write(int line, char ch);
 void correct_line_write(int line, const string &main_key, const string &word);
 void words_analysis(string &to_scan);
 // ll(1) to learn
@@ -39,36 +34,18 @@ void words_analysis(string &to_scan);
 // Find a way to store the connection among the words
 int main(int argc, char **argv) {
     string input_src;
-    correct_line.open("correct.txt", ios::out | ios::trunc);
-    error_line.open("error.txt", ios::out | ios::trunc);    
     for (char ch = '\0'; (ch = getchar()) != EOF; ) {
         input_src.push_back(ch);
     }
     words_analysis(input_src);
-    //print_file_by_name((is_word_error ? "error.txt" : "correct.txt"));
-    //syntax_analysis(word_repo);
-    for(auto i: word_repo) {
-        cout << i->line << " " << i->type << " " << i->word << endl;
-    }
+    Syntax *syntax = new Syntax(word_repo);
+    syntax->syntax_analysis();
     return 0;
-}
-
-void print_file_by_name(const string &name) {
-    ofstream to_print;
-    to_print.open(name, ios::in);
-    cout << to_print.rdbuf();
-    to_print.close();
-}
-
-void error_line_write(int line, char ch) {
-    error_line << "Error type (Lexical) at line " << line
-               << ": Mysterious character " << "\"" << ch << "\"." << endl;
 }
 
 void correct_line_write(int line, const string &main_key, const string &word) {
     Word_info *word_info = new Word_info(line, main_key, word);
     word_repo.push_back(word_info);
-    correct_line << "line" << line << ":(" << main_key << ", " << word << ")" << endl;
 }
 
 void words_analysis(string &to_scan) {
@@ -341,7 +318,6 @@ void words_analysis(string &to_scan) {
                     break;
                 }
                 is_word_error = true;
-                error_line_write(line, ch);
                 ch = to_scan[p++];
             }
             break;
@@ -349,6 +325,4 @@ void words_analysis(string &to_scan) {
         }
         is_matched = false;
     }
-    correct_line.close();
-    error_line.close();
 }

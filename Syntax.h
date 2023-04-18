@@ -7,11 +7,14 @@ using std::string;
 using std::vector;
 class Syntax {
 public:
-    void syntax_analysis(const vector<Word_info*> &to_scan);
+    Syntax(vector<Word_info*> &input);
+    void syntax_analysis();
 private:
-    string lookahead;
+    int idx;
+    Word_info *lookahead;
+    vector<Word_info*> to_scan;
     void match_token(const string &token);
-    void get_token();
+    Word_info *get_token();
     void parse_Program();
     void parse_ExtDefList();
     void parse_ExtDef();

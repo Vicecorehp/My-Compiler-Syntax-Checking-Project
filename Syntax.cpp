@@ -8,19 +8,29 @@
 using std::string;
 using std::vector;
 using std::cout;
+using std::endl;
 
-void Syntax::syntax_analysis(const vector<Word_info*> &to_scan) {
+Syntax::Syntax(vector<Word_info*> &input) {
+    this->to_scan = input;
+    this->idx = 0;
+    this->lookahead = to_scan[0];
+}
+
+void Syntax::syntax_analysis() {
     parse_Program();
 }
 
 void Syntax::match_token(const string &expected) {
-    if(lookahead != expected) {
-        cout << "Error type (Syntactical) at line xx.";
+    if(lookahead->word != expected) {
+        cout << "Error type (Syntactical) at line " << lookahead->line << "." << endl;
+        exit(0);
+    } else {
+        lookahead = get_token();
     }
 }
 
-void Syntax::get_token() {
-
+Word_info *Syntax::get_token() {
+    return to_scan[++idx];
 }
 
 void Syntax::parse_Program() {//1.2.1
