@@ -4,14 +4,17 @@
 #include <string>
 #include <map>
 #include <ios>
-//my_name=HP
-using std::map;
-using std::ios;
+#include <vector>
+#include "Syntax.h"
+#include "Word_info.h"
+
+using std::make_pair;
+using std::ofstream;
+using std::vector;
 using std::cout;
 using std::endl;
-using std::ofstream;
-using std::string;
-using std::fstream;
+using std::ios;
+using std::map;
 
 string type[] = { "int", "float" };
 string key_words[] = { "struct", "return", "if", "else", "while" };
@@ -22,11 +25,13 @@ map<char, string> char_cast = { {'(', "LP"},   {')', "RP"},    {'{', "LC"},    {
                                 {'+', "PLUS"}, {'-', "MINUS"}, {'*', "STAR"},  {'/', "DIV"},
                                 {'.', "DOT"},  {'!', "NOT"},   {'=', "ASSIGNOP"} };
 
+vector<Word_info*> word_repo;
 ofstream correct_line;
 ofstream error_line;
-bool is_error = false;
+bool is_word_error = false;
 
-void error_line_write(int line, char c);
+void print_file_by_name(const string &name);
+void error_line_write(int line, char ch);
 void correct_line_write(int line, const string &main_key, const string &word);
 void words_analysis(string &to_scan);
 // ll(1) to learn
@@ -40,23 +45,29 @@ int main(int argc, char **argv) {
         input_src.push_back(ch);
     }
     words_analysis(input_src);
-    //to_print.open("correct.txt", ios::in);
-    if (is_error) {
-        ofstream to_print;
-        to_print.open("error.txt", ios::in);
-        cout << to_print.rdbuf();
-        to_print.close();
-    } else {
-        cout << "Syntactical Correct." << endl;
+    //print_file_by_name((is_word_error ? "error.txt" : "correct.txt"));
+    //syntax_analysis(word_repo);
+    for(auto i: word_repo) {
+        cout << i->line << " " << i->type << " " << i->word << endl;
     }
     return 0;
 }
 
-void error_line_write(int line) {
-    error_line << "Error type (Syntactical) at line " << line << "." << endl;
+void print_file_by_name(const string &name) {
+    ofstream to_print;
+    to_print.open(name, ios::in);
+    cout << to_print.rdbuf();
+    to_print.close();
+}
+
+void error_line_write(int line, char ch) {
+    error_line << "Error type (Lexical) at line " << line
+               << ": Mysterious character " << "\"" << ch << "\"." << endl;
 }
 
 void correct_line_write(int line, const string &main_key, const string &word) {
+    Word_info *word_info = new Word_info(line, main_key, word);
+    word_repo.push_back(word_info);
     correct_line << "line" << line << ":(" << main_key << ", " << word << ")" << endl;
 }
 
@@ -329,8 +340,8 @@ void words_analysis(string &to_scan) {
                 if (p > int(to_scan.length())) {
                     break;
                 }
-                is_error = true;
-                error_line_write(line);
+                is_word_error = true;
+                error_line_write(line, ch);
                 ch = to_scan[p++];
             }
             break;
