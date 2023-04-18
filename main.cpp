@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 #include <ios>
-//my_name
+//my_name=HP
 using std::map;
 using std::ios;
 using std::cout;
