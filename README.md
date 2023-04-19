@@ -29,3 +29,24 @@ Dec(N) → VarDec(G) ASSIGNOP Exp(K)
 
 ## A.1.7 Expressions 
 >Exp(K) → LP Exp(K) RP | NOT Exp(K) | INT | ID
+
+# Simplified 
+>A → B<br>
+B → C B | ɛ<br>
+C → D E F
+
+>D → TYPE
+
+>G → ID<br>
+E → ID LP RP
+
+>F → LC H I RC<br>
+I → J I | ɛ<br>
+J → K SEMI | RETURN K SEMI 
+
+>H → L H | ɛ<br>
+L → D M SEMI<br>
+M → N<br>
+N → G ASSIGNOP K 
+
+>K → LP K RP | NOT K | INT | ID
