@@ -6,8 +6,7 @@
 # regulation
 ## A.1.2 High-level Definitions 
 >Program(A) → ExtDefList(B)<br>
-ExtDefList(B) → ExtDef(C)<br>
-ExtDefList(B) | ɛ<br>
+ExtDefList(B) → ExtDef(C) ExtDefList(B) | ɛ<br>
 ExtDef(C) → Specifier(D) FunDec(E) Compst(F)
 
 ## A.1.3 Specifiers 
