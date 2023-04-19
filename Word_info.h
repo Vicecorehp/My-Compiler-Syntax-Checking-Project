@@ -1,5 +1,6 @@
 #ifndef __WORD_INFO_H__
 #define __WORD_INFO_H__
+
 #include <string>
 #include <iostream>
 
