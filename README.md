@@ -31,22 +31,22 @@ Dec(N) → VarDec(G) ASSIGNOP Exp(K)
 >Exp(K) → LP Exp(K) RP | NOT Exp(K) | INT | ID
 
 # Simplified 
->A → B<br>
-B → C B | ɛ<br>
-C → D E F
+>1.2.1 A → B<br>
+1.2.2 B → C B | ɛ<br>
+1.2.3 C → D E F
 
->D → TYPE
+>1.3.1 D → TYPE
 
->G → ID<br>
-E → ID LP RP
+>1.4.1 G → ID<br>
+1.4.2 E → ID LP RP
 
->F → LC H I RC<br>
-I → J I | ɛ<br>
-J → K SEMI | RETURN K SEMI 
+>1.5.1 F → LC H I RC<br>
+1.5.2 I → J I | ɛ<br>
+1.5.3 J → K SEMI | RETURN K SEMI 
 
->H → L H | ɛ<br>
-L → D M SEMI<br>
-M → N<br>
-N → G ASSIGNOP K 
+>1.6.1 H → L H | ɛ<br>
+1.6.2 L → D M SEMI<br>
+1.6.3 M → N<br>
+1.6.4 N → G ASSIGNOP K 
 
->K → LP K RP | NOT K | INT | ID
+>1.7.1 K → LP K RP | NOT K | INT | ID
