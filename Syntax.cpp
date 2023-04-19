@@ -13,7 +13,13 @@ using std::endl;
 Syntax::Syntax(vector<Word_info*> &input) {
     this->to_scan = input;
     this->idx = 0;
+    this->curr_type = "";
     this->lookahead = to_scan[0];
+}
+
+void Syntax::print_error() {
+    cout << "Error type (Syntactical) at line " << lookahead->line << "." << endl;
+    exit(0);
 }
 
 void Syntax::syntax_analysis() {
@@ -21,9 +27,8 @@ void Syntax::syntax_analysis() {
 }
 
 void Syntax::match_token(const string &expected) {
-    if(lookahead->word != expected) {
-        cout << "Error type (Syntactical) at line " << lookahead->line << "." << endl;
-        exit(0);
+    if (lookahead->word != expected) {
+        print_error();
     } else {
         lookahead = get_token();
     }
@@ -38,12 +43,19 @@ void Syntax::parse_Program() {//1.2.1
 }
 
 void Syntax::parse_ExtDefList() {//1.2.2
-    parse_Def();
-    parse_ExtDefList();
+    if (lookahead->type == "TYPE") {
+        match_token("TYPE");
+    } else if (curr_type == "#") {
+        return;
+    } else {
+        print_error();
+    }
 }
 
-void Syntax::parse_ExtDef() {
-
+void Syntax::parse_ExtDef() {//1.2.3
+    parse_Specifier();
+    parse_FunDec();
+    parse_Compst();
 }
 
 void Syntax::parse_Specifier() {//1.3.1

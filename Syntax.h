@@ -12,9 +12,11 @@ public:
 private:
     int idx;
     Word_info *lookahead;
+    string curr_type;
     vector<Word_info*> to_scan;
-    void match_token(const string &token);
     Word_info *get_token();
+    void print_error();
+    void match_token(const string &token);
     void parse_Program();
     void parse_ExtDefList();
     void parse_ExtDef();
