@@ -4,19 +4,24 @@
 #include <string>
 #include <vector>
 #include "Word_info.h"
+
 using std::string;
 using std::vector;
+
 class Syntax {
 public:
-    Syntax(vector<Word_info*> &input);
+    Syntax(vector<Word_info *> &input);
     void syntax_analysis();
 private:
     int idx;
-    bool syntax_error;
+    int tab_cnt;
+    string result;
     Word_info *lookahead;
-    vector<Word_info*> to_scan;
+    vector<Word_info *> to_scan;
     void get_token();
     void print_error();
+    void insert_node(const string key, int tab_cnt_arg);
+    void insert_leaf(const string key, int tab_cnt_arg);
     void match_token(const string &token);
     void parse_Program();
     void parse_ExtDefList();
