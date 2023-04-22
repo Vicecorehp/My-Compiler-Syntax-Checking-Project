@@ -4,7 +4,7 @@
 3. Ignore my bad code style...
 4. Most of the work done in Visual Studio Code
 
-# usage
+# Usage
 ## 1. Linux or UNIX
 Step 1: `git clone 'https://github.com/Vicecorehp/compiler_syntax.git'`<br>
 Step 2: `cd compiler_syntax && make && ./target`<br>
