@@ -1,9 +1,31 @@
-# compiler_syntax
-1. It's a git test
-2. It's just one of my assignment
+# Compiler Syntax Checking Project
+1. It's a git test, which means I'm totally a green hand.
+2. It's just one of my assignment, and it may not satisfy you.
 3. Ignore my bad code style...
+4. Most of the work done in Visual Studio Code
 
-# regulation
+# usage
+## 1. Linux or UNIX
+### Step 1: `git clone 'https://github.com/Vicecorehp/compiler_syntax.git'`<br>
+### Step 2: `cd compiler_syntax && make && ./target`
+### Step 3: `<input your code>`
+### *tip*: `In the last Step, remember pressing Ctrl+D to finish inputting.`
+
+## 2. Windows with Visual Studio(VS)
+### Step 1: `Create a No-file ConsoleApplication from the VS template`
+### Step 2: `import the *.h and *.cpp files in VS`
+### Step 3: `Click Run Button and a terminal Windows will pop up`
+### Step 4: `<input your code>` 
+### *tip*: `In the last Step, remember pressing Ctrl+Z to finish inputting.`
+
+## 2. Windows without Visual Studio(VS)
+### Step 1: `Write a batch script(*.bat): g++ main.cpp Syntax.h Syntax.cpp Word_info -o target`
+### Step 2: `run your customed *.bat file and keep waiting while compiling`
+### Step 3: `Change directory to your current workspace in cmd or powershell, run './target'`
+### Step 4: `<input your code>` 
+### *tip*: `In the last Step, remember pressing Ctrl+Z to finish inputting.`
+
+# Regulation
 ## A.1.2 High-level Definitions 
 >Program(A) → ExtDefList(B)<br>
 ExtDefList(B) → ExtDef(C) ExtDefList(B) | ɛ<br>
