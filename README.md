@@ -14,7 +14,7 @@ Step 3: `<input your testing code>`<br>
 ## 2. Windows with Visual Studio (VS)
 Step 1: Create a No-file ConsoleApplication from the VS template<br>
 Step 2: import the `*.h` and `*.cpp` files in VS<br>
-Step 3: Click Run Button and a terminal Windows will pop up<br>
+Step 3: Click Run Button and a terminal Window will pop up<br>
 Step 4: `<input your testing code>` <br>
 *tip*: In the last Step, remember pressing `Ctrl+Z` to finish inputting.
 
@@ -25,6 +25,11 @@ Step 3: run your customed `compiler.bat` file by running `.\compiler.bat` and ke
 Step 4: After Step 3, input `.\target` to begin Syntax Checking<br>
 Step 5: `<input your testing code>` <br>
 *tip*: In the last Step, remember pressing `Ctrl+Z` to finish inputting.
+
+# Something Else
+Some bugs still exist<br>
+example: `double free or corruption (out)`<br>
+if you have any idea to solve it, please tell me.
 
 # Regulation
 ## A.1.2 High-level Definitions 
