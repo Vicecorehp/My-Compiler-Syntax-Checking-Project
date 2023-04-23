@@ -62,7 +62,7 @@ void Syntax::insert_leaf(const string key, int tab_cnt_arg) {
 void Syntax::syntax_analysis() {
     parse_Program();
     cout << "Syntactical Correct." << endl;
-    cout << this->result;
+    //cout << this->result;
 }
 
 void Syntax::match_token(const string &expected) {
