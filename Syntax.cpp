@@ -9,8 +9,10 @@
 using std::string;
 using std::vector;
 using std::to_string;
+using std::stoi;
 using std::cout;
 using std::endl;
+using std::stoi;
 
 Syntax::Syntax(vector<Word_info *> &input) {
     this->to_scan = input;
@@ -50,37 +52,8 @@ void Syntax::insert_leaf(const string key, int tab_cnt_arg) {
         str.append(": " + this->lookahead->word);
     }
     else if (key == "INT") {
-        int converted_num = 0;
-        if (this->lookahead->word[0] == '0') {
-            const string &num = this->lookahead->word;
-            int digits = 0;
-            switch (num[1]) {
-            case 'x': case 'X':
-                digits = num.length() - 3;
-                for (auto i = num.begin()+2; i != num.end(); ++i) {
-                    if (*i >= 'A' && *i <= 'F') {
-                        converted_num += (*i - 'A' + 10) * pow(16, digits--);
-                    }
-                    else if (*i >= 'a' && *i <= 'f') {
-                        converted_num += (*i - 'a' + 10) * pow(16, digits--);
-                    }
-                    else {
-                        converted_num += (*i - '0') * pow(16, digits--);
-                    }
-                }
-                break;
-            default:
-                digits = num.length() - 2;
-                for (auto i = num.begin() + 1; i != num.end(); ++i) {
-                    converted_num += (*i - '0') * pow(8, digits--);
-                }
-                break;
-            }
-            str.append(": " + to_string(converted_num));
-        }
-        else {
-            str.append(": " + this->lookahead->word);
-        }
+        int converted_num = stoi(this->lookahead->word, nullptr, 0);
+        str.append(": " + to_string(converted_num));
     }
     str.push_back('\n');
     this->result.append(str);
@@ -88,7 +61,8 @@ void Syntax::insert_leaf(const string key, int tab_cnt_arg) {
 
 void Syntax::syntax_analysis() {
     parse_Program();
-    cout << this->result;
+    cout << "Syntactical Correct." << endl;
+    //cout << this->result;
 }
 
 void Syntax::match_token(const string &expected) {
@@ -243,7 +217,7 @@ void Syntax::parse_DefList() {//1.6.1
     }
     else if (lookahead->type == "LP" || lookahead->type == "NOT" ||
         lookahead->type == "ID" || lookahead->type == "RETURN" ||
-        lookahead->type == "RC") {
+        lookahead->type == "RC" || lookahead->type == "INT") {
         //do nothing
     }
     else {
@@ -261,7 +235,7 @@ void Syntax::parse_Def() {//1.6.2
 }
 
 void Syntax::parse_DecList() {//1.6.3
-    insert_node("DefList", tab_cnt);
+    insert_node("DecList", tab_cnt);
     int tab_cnt_bak = tab_cnt++;
     parse_Dec();
     tab_cnt = tab_cnt_bak;
@@ -285,7 +259,7 @@ void Syntax::parse_Exp() {//1.7.1
         int tab_cnt_bak = tab_cnt++;
         match_token("LP");
         parse_Exp();
-        match_token("OP");
+        match_token("RP");
         tab_cnt = tab_cnt_bak;
     }
     else if (lookahead->type == "NOT") {
