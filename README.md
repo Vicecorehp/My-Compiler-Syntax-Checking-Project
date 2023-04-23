@@ -9,27 +9,22 @@
 Step 1: `git clone 'https://github.com/Vicecorehp/compiler_syntax.git'`<br>
 Step 2: `cd compiler_syntax && make && ./target`<br>
 Step 3: `<input your testing code>`<br>
-*tip*: In the last Step, remember pressing `Ctrl+D` to finish inputting.
+*tip*: In the last Step, press `Ctrl+D` to finish inputting.
 
 ## 2. Windows with Visual Studio (VS)
 Step 1: Create a No-file ConsoleApplication from the VS template<br>
-Step 2: import the `*.h` and `*.cpp` files in VS<br>
+Step 2: Import the `*.h` and `*.cpp` files in VS<br>
 Step 3: Click Run Button and a terminal Window will pop up<br>
 Step 4: `<input your testing code>` <br>
-*tip*: In the last Step, remember pressing `Ctrl+Z` to finish inputting.
+*tip*: In the last Step, press `Ctrl+Z` to finish inputting.
 
 ## 3. Windows without Visual Studio (VS)
 Step 1: Change directory to your current workspace in `cmd` or `powershell`<br>
 Step 2: Write a batch script(`compiler.bat`): `g++ main.cpp Syntax.h Syntax.cpp Word_info.h -o target`<br>
-Step 3: run your customed `compiler.bat` file by running `.\compiler.bat` and keep waiting while compiling<br>
+Step 3: Run `compiler.bat` file by typing `.\compiler.bat` and keep waiting while compiling<br>
 Step 4: After Step 3, input `.\target` to begin Syntax Checking<br>
 Step 5: `<input your testing code>` <br>
-*tip*: In the last Step, remember pressing `Ctrl+Z` to finish inputting.
-
-# Something Else
-Some bugs still exist<br>
-example: `double free or corruption (out)`<br>
-if you have any idea to solve it, please tell me.
+*tip*: In the last Step, press `Ctrl+Z` to finish inputting.
 
 # Regulation
 ## A.1.2 High-level Definitions 
