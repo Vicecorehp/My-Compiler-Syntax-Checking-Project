@@ -6,14 +6,14 @@
 
 # Usage
 ## 1. Linux or UNIX
-Step 1: `git clone 'https://github.com/Vicecorehp/compiler_syntax.git'`<br>
-Step 2: `cd compiler_syntax && make && ./target`<br>
+Step 1: Clone my repository to your workplace via git<br>
+Step 2: `cd My-Compiler-Syntax-Checking-Project && make && ./target`<br>
 Step 3: `<input your testing code>`<br>
 *tip*: In the last Step, press `Ctrl+D` to finish inputting.
 
 ## 2. Windows with Visual Studio (VS)
-Step 1: Create a No-file ConsoleApplication from the VS template<br>
-Step 2: Import the `*.h` and `*.cpp` files in VS<br>
+Step 1: Create a None-file ConsoleApplication in VS<br>
+Step 2: Import the `*.h` and `*.cpp` files<br>
 Step 3: Click Run Button and a terminal Window will pop up<br>
 Step 4: `<input your testing code>` <br>
 *tip*: In the last Step, press `Ctrl+Z` to finish inputting.
