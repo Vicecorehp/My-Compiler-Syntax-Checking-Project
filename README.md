@@ -20,7 +20,7 @@ Step 4: `<input your testing code>` <br>
 
 ## 3. Windows without Visual Studio (VS)
 Step 1: Change directory to your current workspace in `cmd` or `powershell`<br>
-Step 2: Write a batch script(`compiler.bat`): `g++ main.cpp Syntax.h Syntax.cpp Word_info -o target`<br>
+Step 2: Write a batch script(`compiler.bat`): `g++ main.cpp Syntax.h Syntax.cpp Word_info.h -o target`<br>
 Step 3: run your customed `compiler.bat` file by running `.\compiler.bat` and keep waiting while compiling<br>
 Step 4: After Step 3, input `.\target` to begin Syntax Checking<br>
 Step 5: `<input your testing code>` <br>
