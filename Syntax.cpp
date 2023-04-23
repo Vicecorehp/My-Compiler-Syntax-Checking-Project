@@ -12,7 +12,6 @@ using std::to_string;
 using std::stoi;
 using std::cout;
 using std::endl;
-using std::stoi;
 
 Syntax::Syntax(vector<Word_info *> &input) {
     this->to_scan = input;
@@ -50,8 +49,7 @@ void Syntax::insert_leaf(const string key, int tab_cnt_arg) {
     str.append(key);
     if (key == "ID" || key == "TYPE" || key == "FLOAT") {
         str.append(": " + this->lookahead->word);
-    }
-    else if (key == "INT") {
+    } else if (key == "INT") {
         int converted_num = stoi(this->lookahead->word, nullptr, 0);
         str.append(": " + to_string(converted_num));
     }
@@ -62,7 +60,7 @@ void Syntax::insert_leaf(const string key, int tab_cnt_arg) {
 void Syntax::syntax_analysis() {
     parse_Program();
     cout << "Syntactical Correct." << endl;
-    //cout << this->result;
+    cout << this->result;
 }
 
 void Syntax::match_token(const string &expected) {
@@ -71,8 +69,7 @@ void Syntax::match_token(const string &expected) {
     }
     if (lookahead->type != expected) {
         print_error();
-    }
-    else {
+    } else {
         insert_leaf(expected, tab_cnt);
         get_token();
     }
@@ -94,15 +91,13 @@ void Syntax::parse_Program() {//1.2.1
 void Syntax::parse_ExtDefList() {//1.2.2
     if (lookahead->type == "$") {
         match_token("$");
-    }
-    else if (lookahead->type == "TYPE") {
+    } else if (lookahead->type == "TYPE") {
         insert_node("ExtDefList", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         parse_ExtDef();
         parse_ExtDefList();
         tab_cnt = tab_cnt_bak;
-    }
-    else {
+    } else {
         print_error();
     }
 }
@@ -122,8 +117,7 @@ void Syntax::parse_Specifier() {//1.3.1
         int tab_cnt_bak = tab_cnt++;
         match_token("TYPE");
         tab_cnt = tab_cnt_bak;
-    }
-    else {
+    } else {
         print_error();
     }
 }
@@ -134,8 +128,7 @@ void Syntax::parse_VarDec() {//1.4.1
         int tab_cnt_bak = tab_cnt++;
         match_token("ID");
         tab_cnt = tab_cnt_bak;
-    }
-    else {
+    } else {
         print_error();
     }
 }
@@ -162,19 +155,16 @@ void Syntax::parse_Compst() {//1.5.1
 void Syntax::parse_StmtList() {//1.5.2
     if (lookahead->type == "$") {
         match_token("$");
-    }
-    else if (lookahead->type == "LP" || lookahead->type == "NOT" ||
+    } else if (lookahead->type == "LP" || lookahead->type == "NOT" ||
         lookahead->type == "ID" || lookahead->type == "RETURN") {
         insert_node("StmtList", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         parse_Stmt();
         parse_StmtList();
         tab_cnt = tab_cnt_bak;
-    }
-    else if (lookahead->type == "RC") {
+    } else if (lookahead->type == "RC") {
         //do nothing
-    }
-    else {
+    } else {
         print_error();
     }
 }
@@ -182,24 +172,21 @@ void Syntax::parse_StmtList() {//1.5.2
 void Syntax::parse_Stmt() {//1.5.3
     if (lookahead->type == "$") {
         match_token("$");
-    }
-    else if (lookahead->type == "LP" || lookahead->type == "NOT" ||
+    } else if (lookahead->type == "LP" || lookahead->type == "NOT" ||
         lookahead->type == "ID") {
         insert_node("Stmt", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         parse_Exp();
         match_token("SEMI");
         tab_cnt = tab_cnt_bak;
-    }
-    else if (lookahead->type == "RETURN") {
+    } else if (lookahead->type == "RETURN") {
         insert_node("Stmt", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         match_token("RETURN");
         parse_Exp();
         match_token("SEMI");
         tab_cnt = tab_cnt_bak;
-    }
-    else {
+    } else {
         print_error();
     }
 }
@@ -207,20 +194,17 @@ void Syntax::parse_Stmt() {//1.5.3
 void Syntax::parse_DefList() {//1.6.1
     if (lookahead->type == "$") {
         match_token("$");
-    }
-    else if (lookahead->type == "TYPE") {
+    } else if (lookahead->type == "TYPE") {
         insert_node("DefList", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         parse_Def();
         parse_DefList();
         tab_cnt = tab_cnt_bak;
-    }
-    else if (lookahead->type == "LP" || lookahead->type == "NOT" ||
+    } else if (lookahead->type == "LP" || lookahead->type == "NOT" ||
         lookahead->type == "ID" || lookahead->type == "RETURN" ||
         lookahead->type == "RC" || lookahead->type == "INT") {
         //do nothing
-    }
-    else {
+    } else {
         print_error();
     }
 }
@@ -253,41 +237,35 @@ void Syntax::parse_Dec() {//1.6.4
 void Syntax::parse_Exp() {//1.7.1
     if (lookahead->type == "$") {
         match_token("$");
-    }
-    else if (lookahead->type == "LP") {
+    } else if (lookahead->type == "LP") {
         insert_node("Exp", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         match_token("LP");
         parse_Exp();
         match_token("RP");
         tab_cnt = tab_cnt_bak;
-    }
-    else if (lookahead->type == "NOT") {
+    } else if (lookahead->type == "NOT") {
         insert_node("Exp", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         match_token("NOT");
         parse_Exp();
         tab_cnt = tab_cnt_bak;
-    }
-    else if (lookahead->type == "INT") {
+    } else if (lookahead->type == "INT") {
         insert_node("Exp", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         match_token("INT");
         tab_cnt = tab_cnt_bak;
-    }
-    else if (lookahead->type == "FLOAT") {
+    } else if (lookahead->type == "FLOAT") {
         insert_node("Exp", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         match_token("FLOAT");
         tab_cnt = tab_cnt_bak;
-    }
-    else if (lookahead->type == "ID") {
+    } else if (lookahead->type == "ID") {
         insert_node("Exp", tab_cnt);
         int tab_cnt_bak = tab_cnt++;
         match_token("ID"); 
         tab_cnt = tab_cnt_bak;
-    }
-    else {
+    } else {
         print_error();
     }
 }
